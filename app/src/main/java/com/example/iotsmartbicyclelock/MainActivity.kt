@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import app.akexorcist.bluetotohspp.library.BluetoothSPP
@@ -16,6 +17,9 @@ import app.akexorcist.bluetotohspp.library.DeviceList
 class MainActivity() : AppCompatActivity() {
     // import한 BluetoothSPP 변수 선언
     private var bt: BluetoothSPP? = null
+    // 자물쇠 잠금 이미지 flag
+    private var flag:Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -109,9 +113,18 @@ class MainActivity() : AppCompatActivity() {
 
     // 블루투스 사용 - 데이터 전송
     fun setup() {
-        val btnSend = findViewById<Button>(R.id.btnSend) //데이터 전송
+        val btnSend = findViewById<ImageView>(R.id.btnSend) //데이터 전송
         btnSend.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {
+                // 자물쇠 이미지 설정
+                if(flag){
+                    btnSend.setImageResource(R.drawable.lock)
+                    flag=false
+                }
+                else{
+                    btnSend.setImageResource(R.drawable.unlock)
+                    flag = true
+                }
                 bt!!.send("5", true)
             }
         })
