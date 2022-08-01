@@ -2,11 +2,10 @@ package com.example.iotsmartbicyclelock
 
 import android.bluetooth.BluetoothAdapter
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import app.akexorcist.bluetotohspp.library.BluetoothSPP
 import app.akexorcist.bluetotohspp.library.BluetoothSPP.BluetoothConnectionListener
@@ -40,6 +39,16 @@ class MainActivity() : AppCompatActivity() {
 
             //데이터 수신되면
             Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show() // 토스트로 데이터 띄움
+
+            val sample = findViewById<Button>(R.id.btnSample)
+            if(message == "1"){
+                sample.setBackgroundColor(resources.getColor(R.color.red))
+                sample.setText("털림")
+            }else{
+                sample.setBackgroundColor(resources.getColor(R.color.green))
+                sample.setText("안전")
+            }
+
         })
 
         // 블루투스가 잘 연결이 되었는지 감지하는 리스너
@@ -128,6 +137,30 @@ class MainActivity() : AppCompatActivity() {
                 bt!!.send("5", true)
             }
         })
+
+        val my_seekBar = findViewById<SeekBar>(R.id.seek_bar)
+        val my_text  = findViewById<TextView>(R.id.TV)
+        my_seekBar.setOnSeekBarChangeListener(object :SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                my_text.text = progress.toString()
+                bt!!.send((progress*10).toString(),true)
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+
+            }
+        })
+
+
+        val sound_off = findViewById<Button>(R.id.btnSoundOff)
+        sound_off.setOnClickListener {
+            bt!!.send("100",true)
+        }
+
     }
 
     // 새로운 액티비티 (현재 액티비티의 반환 액티비티?)
