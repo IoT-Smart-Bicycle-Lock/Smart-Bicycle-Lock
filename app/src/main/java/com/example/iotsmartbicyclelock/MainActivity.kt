@@ -72,6 +72,8 @@ class MainActivity() : AppCompatActivity() {
                 ).show()
             }
         })
+
+
         // 연결하는 기능 버튼 가져와서 이용하기
         val btnConnect = findViewById<Button>(R.id.btnConnect) //연결시도
         // 버튼 클릭하면
