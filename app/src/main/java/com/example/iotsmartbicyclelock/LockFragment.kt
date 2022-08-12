@@ -87,6 +87,7 @@ class LockFragment:Fragment() {
 
 
 
+        // light seekbar
             binding.soundSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
             binding.soundTVResult.text = progress.toString()
@@ -102,6 +103,24 @@ class LockFragment:Fragment() {
 
         }
     })
+
+        binding.lightSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                binding.lightTVResult.text = progress.toString()
+                light = (progress*100).toString()
+                bt!!.send((progress*100).toString(),true)
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+
+            }
+        })
+
+
 
 
 
