@@ -88,21 +88,21 @@ class LockFragment:Fragment() {
 
 
         // light seekbar
-            binding.soundSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
-        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-            binding.soundTVResult.text = progress.toString()
-            sound = (progress*10).toString()
-            bt!!.send((progress*10).toString(),true)
-        }
+        binding.soundSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                binding.soundTVResult.text = progress.toString()
+                sound = (progress*10).toString()
+                bt!!.send((progress*10).toString(),true)
+            }
 
-        override fun onStartTrackingTouch(p0: SeekBar?) {
+            override fun onStartTrackingTouch(p0: SeekBar?) {
 
-        }
+            }
 
-        override fun onStopTrackingTouch(p0: SeekBar?) {
+            override fun onStopTrackingTouch(p0: SeekBar?) {
 
-        }
-    })
+            }
+        })
 
         binding.lightSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -134,11 +134,11 @@ class LockFragment:Fragment() {
 
 
             if (message == "0") {
-                binding.btnSample.setBackgroundColor(resources.getColor(R.color.red))
-                binding.btnSample.setText("털림")
+                binding.btnCheckSafety.setBackgroundColor(resources.getColor(R.color.red))
+                binding.btnCheckSafety.setText("털림")
             } else {
-                binding.btnSample.setBackgroundColor(resources.getColor(R.color.green))
-                binding.btnSample.setText("안전")
+                binding.btnCheckSafety.setBackgroundColor(resources.getColor(R.color.green))
+                binding.btnCheckSafety.setText("잠금")
             }
 
 
@@ -224,15 +224,15 @@ class LockFragment:Fragment() {
     // 블루투스 사용 - 데이터 전송
     fun setup() {
         //데이터 전송
-        binding.btnSend.setOnClickListener(object : View.OnClickListener {
+        binding.btnLock.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {
                 // 자물쇠 이미지 설정
                 if(flag){
-                    binding.btnSend.setImageResource(R.drawable.lock)
+                    binding.btnLock.setImageResource(R.drawable.lock)
                     flag=false
                 }
                 else{
-                    binding.btnSend.setImageResource(R.drawable.unlock)
+                    binding.btnLock.setImageResource(R.drawable.unlock)
                     flag = true
                 }
                 bt!!.send("5", true)
