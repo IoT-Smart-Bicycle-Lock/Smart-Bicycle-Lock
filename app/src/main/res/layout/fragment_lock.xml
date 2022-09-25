@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="안장"
+                android:text="안장부착"
                 app:backgroundTint="@android:color/holo_green_dark"
                 android:layout_weight="1"
                 app:layout_constraintTop_toTopOf="parent"
@@ -106,7 +106,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="잠금"
+                android:text="자물쇠 잠김"
                 app:backgroundTint="@android:color/holo_green_dark"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -186,13 +186,13 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/sound_TV_result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/sound_LL"/>
+<!--    <TextView-->
+<!--        android:id="@+id/sound_TV_result"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center"-->
+<!--        android:textSize="20sp"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/sound_LL"/>-->
 
 
     <LinearLayout
@@ -229,13 +229,13 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/light_TV_result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/light_LL"/>
+<!--    <TextView-->
+<!--        android:id="@+id/light_TV_result"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center"-->
+<!--        android:textSize="20sp"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/light_LL"/>-->
 
 
     <!--    <TextView-->

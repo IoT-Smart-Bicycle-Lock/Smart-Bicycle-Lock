@@ -90,7 +90,7 @@ class LockFragment:Fragment() {
         // light seekbar
         binding.soundSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                binding.soundTVResult.text = progress.toString()
+                //binding.soundTVResult.text = progress.toString()
                 sound = (progress*10).toString()
                 bt!!.send((progress*10).toString(),true)
             }
@@ -106,7 +106,7 @@ class LockFragment:Fragment() {
 
         binding.lightSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                binding.lightTVResult.text = progress.toString()
+                //binding.lightTVResult.text = progress.toString()
                 light = (progress*100).toString()
                 bt!!.send((progress*100).toString(),true)
             }
@@ -129,20 +129,42 @@ class LockFragment:Fragment() {
         bt!!.setOnDataReceivedListener(BluetoothSPP.OnDataReceivedListener { data, message ->
 
 
-            //데이터 수신되면
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show() // 토스트로 데이터 띄움
+            // 데이터 수신되면
+            // Toast.makeText(context, message, Toast.LENGTH_SHORT).show() // 토스트로 데이터 띄움
 
 
+            // 0 : 잠금 상태, 자물쇠 떨어짐, 안장 탈착
+            // 1 : 잠금 상태, 자물쇠 떨어짐, 안장 부착
+            // 2 : 잠금 상태, 자물쇠 붙어있음, 안장 탈착
+            // 3 : 잠금 상태, 자물쇠 붙어있음, 안장 부착
+
+            // 4 : 해제 상태
             if (message == "0") {
                 binding.btnCheckSafety.setBackgroundColor(resources.getColor(R.color.red))
-                binding.btnCheckSafety.setText("털림")
-            } else {
+                binding.btnCheckSafety.setText("자물쇠 털림")
+                binding.btnSeatCushion.setBackgroundColor(resources.getColor(R.color.red))
+                binding.btnSeatCushion.setText("안장 탈착")
+            } else if(message == "1"){
+                binding.btnCheckSafety.setBackgroundColor(resources.getColor(R.color.red))
+                binding.btnCheckSafety.setText("자물쇠 털림")
+                binding.btnSeatCushion.setBackgroundColor(resources.getColor(R.color.green))
+                binding.btnSeatCushion.setText("안장 부착")
+            }else if(message == "2"){
+               binding.btnCheckSafety.setBackgroundColor(resources.getColor(R.color.green))
+               binding.btnCheckSafety.setText("자물쇠 잠김")
+                binding.btnSeatCushion.setBackgroundColor(resources.getColor(R.color.red))
+                binding.btnSeatCushion.setText("안장 탈착")
+            }else if(message == "3"){
+               binding.btnCheckSafety.setBackgroundColor(resources.getColor(R.color.green))
+               binding.btnCheckSafety.setText("자물쇠 잠김")
+                binding.btnSeatCushion.setBackgroundColor(resources.getColor(R.color.green))
+                binding.btnSeatCushion.setText("안장 부착")
+            }else if(message == "4"){
                 binding.btnCheckSafety.setBackgroundColor(resources.getColor(R.color.green))
-                binding.btnCheckSafety.setText("잠금")
-            }
-
-
-
+                binding.btnCheckSafety.setText("자물쇠 잠김")
+               binding.btnSeatCushion.setBackgroundColor(resources.getColor(R.color.green))
+               binding.btnSeatCushion.setText("안장 부착")
+           }
         })
 
 
@@ -238,11 +260,10 @@ class LockFragment:Fragment() {
                 bt!!.send("5", true)
             }
         })
-
-
-
-
         sound = MyApplication.prefs.getString("sound","0")
+
+        // 터치하지 않았을 경우
+        bt!!.send("44", true)
 
 //        binding.btnSoundApply.setOnClickListener {
 //            bt!!.send(sound, true)
