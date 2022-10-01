@@ -9,9 +9,9 @@
     <application
         android:name=".sharedPreferences.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_my_image"
+        android:icon="@mipmap/ic_bicycle_lock_image"
         android:label="JinUkTest"
-        android:roundIcon="@mipmap/ic_my_image_round"
+        android:roundIcon="@mipmap/ic_bicycle_lock_image_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IoTSmartBicycleLock">
         <activity
