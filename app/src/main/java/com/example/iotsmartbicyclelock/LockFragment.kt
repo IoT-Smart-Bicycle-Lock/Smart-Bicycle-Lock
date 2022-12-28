@@ -1,5 +1,6 @@
 package com.example.iotsmartbicyclelock
 
+import android.Manifest
 import android.bluetooth.BluetoothAdapter
 import android.content.Intent
 import android.os.Build
@@ -42,17 +43,31 @@ class LockFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        // 변경된 안드로이드 블루투스 권한
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            requestPermissions(
+                arrayOf(
+                    Manifest.permission.BLUETOOTH,
+                    Manifest.permission.BLUETOOTH_SCAN,
+                    Manifest.permission.BLUETOOTH_ADVERTISE,
+                    Manifest.permission.BLUETOOTH_CONNECT
+                ),
+                1
+            )
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(
+                arrayOf(
+                    Manifest.permission.BLUETOOTH
+                ),
+                1
+            )
+        }
+
         _binding = FragmentLockBinding.inflate(inflater,container,false)
         val root:View = binding.root
 
-
-
-
-
         Log.e("now","여기는 onCreateView")
-
-
-
 
         // 객체 생성 후 미리 선언한 변수에 넣음
         bt = BluetoothSPP(requireContext()) //Initializing
